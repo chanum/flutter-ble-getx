@@ -1,6 +1,6 @@
-# Flutter BLE GetX
+# Flutter BLE Scanner
 
-A new Flutter project.
+BLE devices scanner with Getx framework and blue library.
 
 ## Getting Started
 
