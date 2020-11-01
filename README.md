@@ -1,4 +1,4 @@
-# ble_test
+# Flutter BLE GetX
 
 A new Flutter project.
 
