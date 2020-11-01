@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:ble_test/controllers/add_devices_controller.dart';
 import 'package:ble_test/controllers/devices_controller.dart';
+import 'package:ble_test/views/about_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +14,10 @@ class DevicesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blueGrey,
+      appBar: AppBar(
+        backgroundColor: Colors.lightBlue,
+        title: Text('BLE Devices'),
+      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -44,6 +49,15 @@ class DevicesPage extends StatelessWidget {
                                   onPressed: () {
                                     addDevicesController
                                         .addDevice(controller.devices[index]);
+
+                                    //Get.snackbar('New device added',
+                                    //    'Device: ${controller.devices[index].name}',
+                                    //  snackPosition: SnackPosition.BOTTOM);
+
+                                    Get.defaultDialog(
+                                        title: 'New device added',
+                                        content: Text(
+                                            'Device: ${controller.devices[index].name}'));
                                   },
                                   color: Colors.blue,
                                   textColor: Colors.white,
@@ -63,6 +77,15 @@ class DevicesPage extends StatelessWidget {
                 );
               },
             ),
+            RaisedButton(
+                onPressed: () {
+                  // Get.snackbar('New device added', 'Device: X',
+                  //     snackPosition: SnackPosition.BOTTOM);
+                  Get.to(AboutPage(), arguments: 'Chanum');
+                },
+                color: Colors.orange,
+                textColor: Colors.white,
+                child: Text('Next')),
             SizedBox(height: 100),
           ],
         ),
