@@ -21,7 +21,8 @@ class FindDevices extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: GetX<DevicesController>(builder: (controller) {
+              child: GetX<DevicesController>
+                (builder: (controller) {
                 return ListView.builder(
                     itemCount: controller.devices.length,
                     itemBuilder: (context, index) {
@@ -80,7 +81,10 @@ class FindDevices extends StatelessWidget {
                 onPressed: () {
                   // Get.snackbar('New device added', 'Device: X',
                   //     snackPosition: SnackPosition.BOTTOM);
-                  Get.to(AboutPage(), arguments: 'Chanum');
+
+                  //Get.to(AboutPage(), arguments: 'Chanum');
+
+                  Get.find<DevicesController>().scanDevices();
                 },
                 color: Colors.orange,
                 textColor: Colors.white,
