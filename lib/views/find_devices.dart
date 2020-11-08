@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/add_devices_controller.dart';
 import '../controllers/devices_controller.dart';
+import 'device_page.dart';
 
 class FindDevices extends StatelessWidget {
   final devicesController = Get.put(DevicesController());
@@ -31,7 +32,11 @@ class FindDevices extends StatelessWidget {
                                 .map(
                                   (r) => ScanResultTile(
                                 result: r,
-                                onTap: () => Get.snackbar('New device', 'Device: X', snackPosition: SnackPosition.BOTTOM)
+                                onTap: () => Navigator.of(context)
+                                    .push(MaterialPageRoute(builder: (context) {
+                                  r.device.connect();
+                                  return DeviceScreen(device: r.device);
+                                })),
                               ),
                             ).toList(),
                           );

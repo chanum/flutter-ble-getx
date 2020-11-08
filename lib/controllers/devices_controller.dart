@@ -13,6 +13,7 @@ class DevicesController extends GetxController {
 
     _flutterBlueResult.listen((scanList) {
       print('BLE Scan Result List: $scanList');
+      discoverDevices.clear();
       discoverDevices.assignAll(scanList);
     });
 
