@@ -1,11 +1,11 @@
-import 'package:ble_test/models/device.dart';
+import 'package:ble_test/models/device_model.dart';
 import 'package:get/get.dart';
 
 class AddDevicesController extends GetxController {
-  var addedDevices = List<Device>().obs;
+  var addedDevices = List<DeviceModel>().obs;
   int get totalDevices => addedDevices.length;
 
-  addDevice(Device device) {
+  addDevice(DeviceModel device) {
     addedDevices.add(device);
   }
 

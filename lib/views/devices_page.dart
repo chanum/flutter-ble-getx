@@ -2,13 +2,16 @@ import 'dart:ui';
 
 import 'package:ble_test/controllers/add_devices_controller.dart';
 import 'package:ble_test/controllers/devices_controller.dart';
+import 'package:ble_test/controllers/main_controller.dart';
 import 'package:ble_test/views/about_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 import 'package:get/get.dart';
 
+import 'bluetooth_off.dart';
+
 class DevicesPage extends StatelessWidget {
-  final devicesController = Get.put(DevicesController());
-  final addDevicesController = Get.put(AddDevicesController());
+  final mainController = Get.put(MainController());
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +21,30 @@ class DevicesPage extends StatelessWidget {
         backgroundColor: Colors.lightBlue,
         title: Text('BLE Devices'),
       ),
+      body: GetX<MainController>(
+          builder: (controller) {
+            final state = controller.bleStatus.value;
+            if (state == BluetoothState.on) {
+              return FindDevicesScreen();
+            }
+            return BluetoothOffScreen(state: state);
+          }),
+    );
+  }
+}
+
+class FindDevicesScreen extends StatelessWidget {
+  final devicesController = Get.put(DevicesController());
+  final addDevicesController = Get.put(AddDevicesController());
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.blueGrey,
+//      appBar: AppBar(
+//        backgroundColor: Colors.lightBlue,
+//        title: Text('BLE Devices'),
+//      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -35,7 +62,7 @@ class DevicesPage extends StatelessWidget {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                       'Device Id: ${controller.devices[index].id}',
