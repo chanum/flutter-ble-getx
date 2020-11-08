@@ -5,29 +5,17 @@ import 'package:get/state_manager.dart';
 class DevicesController extends GetxController {
 
   Stream<List<ScanResult>> _flutterBlueResult = FlutterBlue.instance.scanResults;
-
-  var devices = List<DeviceModel>().obs;
+  final discoverDevices = List<ScanResult>().obs;
 
   @override
   void onInit() {
     super.onInit();
-    discoverDevices();
 
     _flutterBlueResult.listen((scanList) {
       print('BLE Scan Result List: $scanList');
+      discoverDevices.assignAll(scanList);
     });
 
-  }
-
-  void discoverDevices() async {
-    await Future.delayed(Duration(seconds: 2));
-    var deviceResult = [
-      DeviceModel(id: 1, name: 'Oximeter'),
-      DeviceModel(id: 2, name: 'Heart Rate'),
-      DeviceModel(id: 3, name: 'Blood Pressure')
-    ];
-
-    devices.value = deviceResult;
   }
 
   void scanDevices() {
